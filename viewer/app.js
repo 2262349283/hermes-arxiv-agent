@@ -100,6 +100,22 @@ function renderCards(papers) {
 
     node.querySelector(".pill").textContent = p.arxiv_id;
 
+    // Rating badge
+    const badge = node.querySelector(".rating-badge");
+    const rating = text(p.rating) || "";
+    if (rating.includes("战略") || rating.includes("⚡")) {
+      badge.className = "rating-badge rating-s";
+      badge.textContent = "⚡ 战略级";
+    } else if (rating.includes("可操作") || rating.includes("🔧")) {
+      badge.className = "rating-badge rating-a";
+      badge.textContent = "🔧 可操作";
+    } else if (rating.includes("了解") || rating.includes("📖")) {
+      badge.className = "rating-badge rating-b";
+      badge.textContent = "📖 值得了解";
+    } else {
+      badge.style.display = "none";
+    }
+
     const title = node.querySelector(".title");
     title.textContent = text(p.title) || p.arxiv_id;
     title.href = `https://arxiv.org/abs/${p.arxiv_id}`;
